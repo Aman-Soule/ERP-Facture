@@ -1,4 +1,5 @@
 let table;
+let tableEmploye;
 $(document).ready(function() {
     // Initialisation unique de DataTable
     table = $('#factureTable').DataTable({
@@ -20,6 +21,33 @@ $(document).ready(function() {
             }
         ]
     });
+
+    // Initialisation DataTable pour les employés
+    tableEmploye = $('#employeTable').DataTable({
+        destroy: true,
+        ajax: 'employes.php',
+        columns: [
+            { data: 'id_employe' },
+            { data: 'nom' },
+            { data: 'prenom' },
+
+            { data: 'nom_role' },   // affichage du rôle
+            { data: 'actif',
+                render: function(data) {
+                    return data ? '<span class="badge bg-success">Actif</span>'
+                        : '<span class="badge bg-secondary">Inactif</span>';
+                }
+            },
+
+            { data: null, defaultContent:
+                    '<a href="#" class="text-info me-2"><i class="fas fa-info-circle"></i></a>' +
+                    '<a href="#" class="text-primary me-2"><i class="fas fa-edit"></i></a>' +
+                    '<a href="#" class="text-danger me-2"><i class="fas fa-trash-alt"></i></a>'
+            }
+        ]
+    });
+
+
     //when we click on #battlefield Ajout d'une facture
     $("#create").click(function(e) {
         let formOrder = $("#formOrder");

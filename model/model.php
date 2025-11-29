@@ -29,7 +29,29 @@ class Database
         return $this->pdo;
     }
 }
+//Classe Employe
+class Employe {
+    private $conn;
+    private $pdo;
 
+
+    public function __construct() {
+        $db = new Database();
+        $this->conn = $db->getConnection();
+    }
+
+    // Fonction SELECT
+    public function getAllEmployes() {
+        $sql = "SELECT e.id_employe, e.nom, e.prenom, r.nom_role
+            FROM employe e
+            JOIN role r ON e.id_role = r.id_role
+            ORDER BY e.id_employe DESC";
+
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+}
 
 //Classe facture
 class Facture {
