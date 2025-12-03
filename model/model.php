@@ -2,123 +2,167 @@
 
 class Database
 {
-    private $host = "localhost";      // ou 127.0.0.1
-    private $port = "5432";           // port par défaut PostgreSQL
-    private $dbname = "crud_ajax";  // nom de ta base
-    private $user = "postgres";       // utilisateur PostgreSQL
-    private $password = "tarte07?"; // mot de passe
-    private $pdo;                     // objet PDO
+    private $host;
+    private $port;
+    private $dbname;
+    private $user;
+    private $password;
+    private $pdo;
 
-    // Constructeur : initialise la connexion
     public function __construct()
     {
+        // Détection automatique de l'environnement
+        $isRender = isset($_SERVER['RENDER']) || getenv('RENDER');
+
+        if ($isRender) {
+            // CONFIGURATION RENDER (PostgreSQL)
+            $this->host = getenv('DB_HOST') ?: 'dpg-d4o0ginpm1nc73fng7dg-a';
+            $this->port = getenv('DB_PORT') ?: '5432';
+            $this->dbname = getenv('DB_NAME') ?: 'gestion_yyrb';
+            $this->user = getenv('DB_USER') ?: 'aman';
+            $this->password = getenv('DB_PASSWORD') ?: 'y6D8Iou46JBEg30QqRfsALPVd6z8k8Lq';
+        } else {
+            // CONFIGURATION LOCALE (PostgreSQL local)
+            $this->host = "localhost";
+            $this->port = "5432";
+            $this->dbname = "crud_ajax";
+            $this->user = "postgres";
+            $this->password = "tarte07?";
+        }
+
         try {
             $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname}";
             $this->pdo = new PDO($dsn, $this->user, $this->password, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // gestion des erreurs
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // fetch par défaut
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);
+
+            // Charset UTF-8
+            $this->pdo->exec("SET NAMES 'UTF8'");
+
         } catch (PDOException $e) {
-            die("Erreur de connexion : " . $e->getMessage());
+            // Meilleure gestion des erreurs
+            error_log("Erreur DB: " . $e->getMessage());
+
+            if ($isRender) {
+                die("Erreur de connexion à la base de données Render");
+            } else {
+                die("Erreur de connexion locale : " . $e->getMessage());
+            }
         }
     }
 
-    // Méthode pour récupérer l’objet PDO
     public function getConnection()
     {
         return $this->pdo;
     }
 }
-//Classe Employe
+
+// Classe Employe (adaptée)
 class Employe {
-    private $conn;
     private $pdo;
-
 
     public function __construct() {
         $db = new Database();
-        $this->conn = $db->getConnection();
+        $this->pdo = $db->getConnection();
     }
 
-    // Fonction SELECT
     public function getAllEmployes() {
-        $sql = "SELECT e.id_employe, e.nom, e.prenom, r.nom_role
-            FROM employe e
-            JOIN role r ON e.id_role = r.id_role
-            ORDER BY e.id_employe DESC";
+        try {
+            $sql = "SELECT e.id_employe, e.nom, e.prenom, r.nom_role
+                    FROM employe e
+                    JOIN role r ON e.id_role = r.id_role
+                    ORDER BY e.id_employe DESC";
 
-        $stmt = $this->conn->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            error_log("Erreur getAllEmployes: " . $e->getMessage());
+            return [];
+        }
     }
-
 }
 
-//Classe facture
+// Classe Facture (adaptée)
 class Facture {
-    private $conn;
     private $pdo;
 
-    
     public function __construct() {
         $db = new Database();
-        $this->conn = $db->getConnection();
+        $this->pdo = $db->getConnection();
     }
 
-    // Fonction SELECT
     public function getAllFactures() {
-        $sql = "SELECT id, customer,cashier, amount,received, returned, date_facture, status FROM factures ORDER BY id DESC";
-        $stmt = $this->conn->query($sql);
-        return $stmt->fetchAll();
+        try {
+            $sql = "SELECT id, customer, cashier, amount, received, returned, 
+                           date_facture, status 
+                    FROM factures 
+                    ORDER BY id DESC";
+
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            error_log("Erreur getAllFactures: " . $e->getMessage());
+            return [];
+        }
     }
 
-    // ✅ Méthode pour compter les factures
     public function countBills() {
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM factures");
-        return $stmt->fetchColumn();
+        try {
+            $stmt = $this->pdo->query("SELECT COUNT(*) FROM factures");
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Erreur countBills: " . $e->getMessage());
+            return 0;
+        }
     }
 
-    // ✅ Méthode pour lire toutes les factures
     public function read() {
-        $stmt = $this->pdo->query("SELECT * FROM factures");
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        try {
+            $stmt = $this->pdo->query("SELECT * FROM factures");
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            error_log("Erreur read factures: " . $e->getMessage());
+            return [];
+        }
     }
 
-    
-    //Fonction de création d'une facture
     public function createFacture($customer, $cashier, $amount, $received, $returned, $status) {
-        // Préparer la requête d'insertion
-        $sql = "INSERT INTO factures (customer, cashier, amount, received, returned, status) 
-            VALUES (:customer, :cashier, :amount, :received, :returned,  :status)";
+        try {
+            $sql = "INSERT INTO factures (customer, cashier, amount, received, returned, status) 
+                    VALUES (:customer, :cashier, :amount, :received, :returned, :status)";
 
-        // Préparer la requête avec PDO
-        $stmt = $this->conn->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
 
-        // Binder les paramètres
-        $stmt->bindParam(':customer', $customer);
-        $stmt->bindParam(':cashier', $cashier);
-        $stmt->bindParam(':amount', $amount);
-        $stmt->bindParam(':received', $received);
-        $stmt->bindParam(':returned', $returned);
+            $stmt->bindParam(':customer', $customer);
+            $stmt->bindParam(':cashier', $cashier);
+            $stmt->bindParam(':amount', $amount);
+            $stmt->bindParam(':received', $received);
+            $stmt->bindParam(':returned', $returned);
+            $stmt->bindParam(':status', $status);
 
-        $stmt->bindParam(':status', $status);
+            return $stmt->execute();
 
-        // Exécuter et retourner le résultat
-        return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erreur createFacture: " . $e->getMessage());
+            return false;
+        }
     }
+
     public function deleteFacture($id) {
-        // Préparer la requête de suppression
-        $sql = "DELETE FROM factures WHERE id = :id";
+        try {
+            $sql = "DELETE FROM factures WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-        // Préparer avec PDO
-        $stmt = $this->conn->prepare($sql);
+            return $stmt->execute();
 
-        // Binder le paramètre
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        // Exécuter et retourner le résultat
-        return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erreur deleteFacture: " . $e->getMessage());
+            return false;
+        }
     }
-
-
-
 }
+?>
