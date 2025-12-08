@@ -1,9 +1,3 @@
-<?php
-// En haut du fichier login.php
-if (isset($_GET['error'])) {
-    $error_message = htmlspecialchars($_GET['error']);
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -75,12 +69,6 @@ if (isset($_GET['error'])) {
 
     <div class="login-body">
         <form action="../process/login.php" method="POST">
-            <?php if (isset($error_message)) { ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Identifiants incorrects
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php } ?>
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
                 <div class="input-group">
@@ -118,42 +106,42 @@ if (isset($_GET['error'])) {
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!--<script>-->
-<!--    // Toggle password visibility-->
-<!--    document.getElementById('togglePassword').addEventListener('click', function() {-->
-<!--        const password = document.getElementById('password');-->
-<!--        const icon = this.querySelector('i');-->
-<!--        if (password.type === 'password') {-->
-<!--            password.type = 'text';-->
-<!--            icon.classList.remove('fa-eye');-->
-<!--            icon.classList.add('fa-eye-slash');-->
-<!--        } else {-->
-<!--            password.type = 'password';-->
-<!--            icon.classList.remove('fa-eye-slash');-->
-<!--            icon.classList.add('fa-eye');-->
-<!--        }-->
-<!--    });-->
-<!---->
-<!--    // Form submission-->
-<!--    document.getElementById('loginForm').addEventListener('submit', function(e) {-->
-<!--        e.preventDefault();-->
-<!---->
-<!--        const username = document.getElementById('username').value;-->
-<!--        const password = document.getElementById('password').value;-->
-<!---->
-<!--        // Animation du bouton-->
-<!--        const submitBtn = this.querySelector('button[type="submit"]');-->
-<!--        const originalText = submitBtn.innerHTML;-->
-<!--        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Connexion...';-->
-<!--        submitBtn.disabled = true;-->
-<!---->
-<!--        // Simulation de vérification (à remplacer par une vraie requête AJAX)-->
-<!--        setTimeout(() => {-->
-<!--            // Pour l'exemple, on accepte tout-->
-<!--            // En réalité, il faudrait envoyer une requête AJAX au serveur-->
-<!--            window.location.href = 'dashboard.php';-->
-<!--        }, 1000);-->
-<!--    });-->
-<!--</script>-->
+<script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const password = document.getElementById('password');
+        const icon = this.querySelector('i');
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            password.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+
+    // Form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Animation du bouton
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Connexion...';
+        submitBtn.disabled = true;
+
+        // Simulation de vérification (à remplacer par une vraie requête AJAX)
+        setTimeout(() => {
+            // Pour l'exemple, on accepte tout
+            // En réalité, il faudrait envoyer une requête AJAX au serveur
+            window.location.href = 'dashboard.php';
+        }, 1000);
+    });
+</script>
 </body>
 </html>

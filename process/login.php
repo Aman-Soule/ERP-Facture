@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../index.php');
             exit();
         }
-        else{
-            header('Location: ../page/login.php?error=Identifiants incorrects');
-            exit();
+        else
+        {
+            error_log("Identifiant ou mot de passe incorrect");
         }
 
     } catch(PDOException $e) {

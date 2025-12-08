@@ -4,8 +4,6 @@ session_start();
 // Inclure la configuration de la base de données
 require_once ("config/database.php");
 
-//$liste = allUsers();
-//var_dump($liste);
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['user_id'])) {
     // Si connecté, afficher l'accueil
@@ -17,5 +15,3 @@ if (isset($_SESSION['user_id'])) {
     // Si NON connecté, afficher la page de connexion
     include_once("page/login.php");
 }
-
-?>
