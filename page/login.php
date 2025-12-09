@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - FACT-PRO</title>
+    <title>Connexion - ETU-PRO</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -63,8 +63,8 @@
 <div class="login-container">
     <div class="login-header">
         <i class="fas fa-file-invoice-dollar"></i>
-        <h2 class="mb-0">FACT-PRO</h2>
-        <p class="mb-0">Gestion des factures</p>
+        <h2 class="mb-0">ETU-PRO</h2>
+        <p class="mb-0">Gestion des Cours</p>
     </div>
 
     <div class="login-body">
@@ -97,7 +97,7 @@
             </div>
 
             <div class="text-center mt-3">
-                <small class="text-muted">Version 1.0 - Développé par AMAN</small>
+                <small class="text-muted">Version 1.1 - Développé par AMAN</small>
             </div>
         </form>
     </div>

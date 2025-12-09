@@ -149,7 +149,7 @@
                         <i class="fas fa-hand-wave ms-2"></i>
                     </h1>
                     <p class="lead mb-0 opacity-75">
-                        Bienvenue sur votre tableau de bord FACT-PRO. Gérez vos factures en toute simplicité.
+                        Bienvenue sur votre tableau de bord ETU-PRO. Gérez vos cours en toute simplicité.
                     </p>
                 </div>
                 <div class="col-md-4 text-end">
@@ -180,13 +180,13 @@
                                 <i class="fas fa-file-invoice-dollar"></i>
                             </div>
                             <div>
-                                <div class="stat-label">Factures Total</div>
+                                <div class="stat-label">Total des cours</div>
                                 <div class="stat-value" id="totalFactures">0</div>
                             </div>
                         </div>
                         <div class="mt-3">
                             <span class="badge bg-primary bg-opacity-10 text-primary">
-                                <i class="fas fa-arrow-up me-1"></i> +12% ce mois
+                                <i class="fas fa-arrow-up me-1"></i> 0% ce mois
                             </span>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div>
-                                <div class="stat-label">Payées</div>
+                                <div class="stat-label">Cours achevés </div>
                                 <div class="stat-value" id="facturesPayees">0</div>
                             </div>
                         </div>
