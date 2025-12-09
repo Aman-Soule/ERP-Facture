@@ -21,8 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
+            // Stockez TOUTES les colonnes dans la session
+            // Méthode 1 : Toutes les colonnes comme variables séparées
+            foreach ($user as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
+
+            // Méthode 2 : ET stockez aussi dans un tableau user (recommandé)
+            $_SESSION['user'] = $user;
+
+            // Stockez aussi les données fréquemment utilisées
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['nom'] = $user['nom'];
+            $_SESSION['prenom'] = $user['prenom'] ?? '';
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['adresse'] = $user['adresse'];
+            $_SESSION['tel'] = $user['tel'];
+            $_SESSION['etablissement'] = $user['etablissement'] ?? '';
             header('Location: ../index.php');
             exit();
         }

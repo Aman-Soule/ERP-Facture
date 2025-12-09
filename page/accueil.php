@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord - FACT-PRO</title>
-
-    <!-- Styles supplémentaires pour le dashboard -->
+<!-- Styles supplémentaires pour le dashboard -->
     <style>
         :root {
             --primary-color: #4c6ef5;
@@ -143,8 +136,6 @@
             }
         }
     </style>
-</head>
-<body>
     <!-- Header du Dashboard -->
     <div class="dashboard-header">
         <div class="container">
@@ -571,5 +562,3 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
     </script>
-</body>
-</html>
