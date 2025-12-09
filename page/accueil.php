@@ -463,7 +463,7 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h5>Objectif de facturation : 15 000 €</h5>
+                        <h5>Objectif annuel : 15 000 €</h5>
                         <div class="progress mb-3" style="height: 20px;">
                             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
                                  style="width: 65%">

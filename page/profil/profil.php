@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="info-badge">
-                                <small class="text-muted d-block">Entreprise</small>
+                                <small class="text-muted d-block">Etablissement</small>
                                 <strong><?php echo htmlspecialchars($_SESSION['etablissement'] ?? 'Entrepreneur indépendant'); ?></strong>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
         <!-- Colonne Latérale -->
         <div class="col-lg-4">
             <!-- Compétences -->
-            <div class="profile-card card border-0 shadow-sm mb-4">
+            <div class="profile-card card border-0 shadow-sm mb-4" hidden>
                 <div class="card-header bg-white border-0">
                     <h5 class="section-title">
                         <i class="fas fa-tools me-2"></i>Compétences
