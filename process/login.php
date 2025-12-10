@@ -12,15 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $conn = getConnection();
-        $query = "SELECT * FROM utilisateurs WHERE email = :email AND password = :password";
+        $query = "SELECT * FROM utilisateurs WHERE email = :email";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password); // ATTENTION: mot de passe en clair
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
+        //Verification des mots de passe hashés
+        if ($user && password_verify($password, $user['password'])) {
             // Stockez TOUTES les colonnes dans la session
             // Méthode 1 : Toutes les colonnes comme variables séparées
             foreach ($user as $key => $value) {
