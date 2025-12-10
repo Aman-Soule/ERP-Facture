@@ -114,6 +114,10 @@ if (isset($_GET['error'])) {
                 <small class="text-muted">Version 1.1 - Développé par AMAN</small>
             </div>
         </form>
+        <!-- Lien vers la page d'inscription (hors formulaire) -->
+        <div class="text-center mt-3">
+            <a href="../page/inscription.php" class="btn btn-link">Créer un compte</a>
+        </div>
     </div>
 </div>
 

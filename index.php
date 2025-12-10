@@ -28,8 +28,8 @@ if (isset($_SESSION['user_id'])) {
         case 'profil':
             include_once("page/profil/profil.php");
             break;
-        case 'notifications':
-            include_once("page/notifications.php");
+        case 'parametre':
+            include_once("page/parametre/parametre.php");
             break;
         case 'deconnexion':
             // Gérer la déconnexion

@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-md-3 text-center text-md-end">
-                <a href="?page=parametres" class="btn btn-light btn-lg px-4">
+                <a href="?page=parametre" class="btn btn-light btn-lg px-4">
                     <i class="fas fa-cog me-2"></i> Modifier
                 </a>
             </div>
@@ -104,7 +104,7 @@
                         <div class="col-md-3 col-6 mb-4">
                             <div class="stat-circle bg-primary bg-opacity-10 text-primary">
                                 <span class="display-6 fw-bold">142</span>
-                                <small>Factures</small>
+                                <small>Cours</small>
                             </div>
                         </div>
                         <div class="col-md-3 col-6 mb-4">
@@ -202,7 +202,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Utilisation de FACT-PRO</span>
+                            <span>Utilisation de ETU-PRO</span>
                             <span>98%</span>
                         </div>
                         <div class="skill-progress">
@@ -266,7 +266,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <a href="?page=parametres" class="btn btn-outline-primary">
+                        <a href="?page=parametre" class="btn btn-outline-primary">
                             <i class="fas fa-cog me-2"></i>Paramètres du compte
                         </a>
                         <a href="#" class="btn btn-outline-success">

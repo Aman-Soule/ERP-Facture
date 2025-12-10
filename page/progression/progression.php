@@ -3,7 +3,7 @@
         <div class="card-body text-center py-5">
             <i class="fas fa-chart-line fa-4x text-success mb-4"></i>
             <h1 class="display-4 fw-bold text-success mb-3">
-                <i class="fas fa-trophy"></i> Ma Progression <?= $_SESSION['nom'] ?>
+                <i class="fas fa-trophy"></i>Progression de <?= $_SESSION['nom'] ?>
             </h1>
             <p class="lead text-muted mb-4">
                 Votre progression sera suivie ici.
